@@ -1,0 +1,51 @@
+#board {
+    
+    display:flex;
+    flex-direction: row;
+    background-color: aqua;
+    width: 90vw;
+    height:60vh;
+    /* width: 1000px;
+    height:500px; */
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    justify-content: center;    
+
+
+}
+
+.boardComp {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    padding-left:5vw;
+    padding-right:5vw;
+    padding-top:3vh;
+    padding-bottom:3vh
+
+
+}
+
+#board p {
+    border: 1px solid black;
+    font-size:1.9rem;
+}
+
+
+
+body {
+    text-align: center;
+    overflow:hidden;
+    background-color: black;
+}
+
+label {
+    font-size: 2rem;
+    color: white;
+}
+form {
+    padding-top: 90vh;
+}
