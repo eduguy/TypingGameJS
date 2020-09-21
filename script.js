@@ -4,6 +4,7 @@ document.onkeydown = function(e) {
     {
         var input = document.getElementById("input");
         //CHECK if this is one of the words
+        //if so, points++ and change it to a new word
 
         input.value = "";
 
@@ -11,7 +12,12 @@ document.onkeydown = function(e) {
 }
 
 function startGame() {
+    decrementTime()
     // document.getElementById("input").value = "check";
-    //set all the h2s with words scraped from somewhere?!
+    //set all the h2s with words scraped or hardcoded?
 }
 
+function decrementTime() {
+    //decrement time by 1 if time is not already 0
+    //once 0, end hte game
+}
