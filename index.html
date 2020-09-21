@@ -1,6 +1,7 @@
 <!DOCTYPE html>
  <html>
  <head>
+     <title> Typing Game </title>
     <link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
     <script src="script.js"></script>
  </head>
@@ -32,10 +33,16 @@
             <p> Javascript word </p>
         </div>
     </div>
-    <form>
-        <label for="input"> Enter your input:</label>
-        <input type="text" id = "input" name = "input">
-        <!-- use js to submit this on enter, reset it -->
-    </form>
+    <div id = "inputStuff">
+        <button id = "start" onClick = "startGame()"> Start! </button>
+        <form>
+            <label for="input"> Enter your input:</label>
+            <!-- could work with using input, but that refreshes page? -->
+            <textarea id= "input"> </textarea>
+            <!-- use js to submit this on enter, reset it -->
+
+        </form>
+        <!-- <button id = "button" onclick="doSmth()"> DO SOMETHING</button> -->
+    </div>
 </body>
 </html>

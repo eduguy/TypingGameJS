@@ -46,6 +46,6 @@ label {
     font-size: 2rem;
     color: white;
 }
-form {
-    padding-top: 90vh;
+#inputStuff {
+    padding-top: 80vh;
 }
