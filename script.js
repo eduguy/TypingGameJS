@@ -5,7 +5,8 @@ let active = [];
 let score = 0;
 let time = 30;
 let gameOn=false;
-
+let interval;
+let missedWords=0;
 
 document.onkeydown = function(e) {
     if (e.key === 'Enter')
@@ -16,14 +17,13 @@ document.onkeydown = function(e) {
             let val = input.value.trim();
             let check = active.indexOf(val);
             if (check !== -1) {
-                //TODO: remove word from the grid and replace it with next word
-                // active[check] = "DONE";
+
                 let rand = Math.floor(Math.random() * words.length);
                 let str = words[rand];
                 active[check]= str;
-
+                
                 words.splice(rand, 1);
-                updateGrid();
+                switchVal(check);
                 score++;
                 document.getElementById("score").innerHTML = "Current Score: " + score;
                 // words.splice(check,1);
@@ -33,23 +33,36 @@ document.onkeydown = function(e) {
 
 
     }
-
 }
 
+function switchVal(check) {
+    let v = check+1;
+    let val = document.getElementById("word" + v);
+    val.innerHTML = active[check];
+    setTimeout(fadeOut, 4000, val, check);
+}
+
+function fadeOut(elem, check) {
+    //TODO::
+    //fadeout
+    //getnewword
+    //elem is the word the element that needs to be faded
+    console.log("fadeout");
+    missedWords = missedWords +1;
+}
 
 function startGame() {
     
     initGrid();
     gameOn = true;
-    setInterval(decrementTime, 1000);
+    document.getElementById("input").focus();
+    interval = setInterval(decrementTime, 1000);
     setTimeout(endGame, 30000);
 }
-//whenever you do an updating move (scoring, initilizng), call update word to match
-//the array with the text
+
 function initGrid() {
     let i = 1;
     while (i <= 9) {
-        //TODO: no duplicates
         let rand = Math.floor(Math.random() * words.length);
         let str = words[rand];
         words.splice(rand, 1);
@@ -62,9 +75,7 @@ function initGrid() {
     updateGrid();
 }
 function updateGrid() {
-    // console.log(active[0]);
-    // console.log(active[1]);
-    // console.log(active[2]);
+
     document.getElementById("word1").innerHTML = active[0];
     document.getElementById("word2").innerHTML = active[1];
     document.getElementById("word3").innerHTML = active[2];
@@ -75,7 +86,6 @@ function updateGrid() {
     document.getElementById("word8").innerHTML = active[7];
     document.getElementById("word9").innerHTML = active[8];
 
-    //TODO: ETCCCC
 }
 
 
@@ -85,5 +95,7 @@ function decrementTime() {
 }
 
 function endGame() {
-    //TODO: disable text box, return score
+    //TODO: popup box with score
+    gameOn = false;
+    clearInterval(interval);
 }
