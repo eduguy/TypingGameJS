@@ -1,5 +1,6 @@
 //TODO: find a way to scrape words from somewhere or create a more exhaustive list
-let words = ['abc', 'bac', 'climb', 'rock', 'calculator', 'fds', 'fsa', 'bike', 'fork'];
+let words = ['abc', 'bac', 'climb', 'rock', 'calculator', 'fds', 'fsa', 'bike', 'fork', 'mea', 
+'dog','cat'];
 let active = [];
 let score = 0;
 let time = 30;
@@ -13,12 +14,19 @@ document.onkeydown = function(e) {
 
             let input = document.getElementById("input");
             let val = input.value.trim();
-            let check = words.indexOf(val);
+            let check = active.indexOf(val);
             if (check !== -1) {
                 //TODO: remove word from the grid and replace it with next word
+                // active[check] = "DONE";
+                let rand = Math.floor(Math.random() * words.length);
+                let str = words[rand];
+                active[check]= str;
+
+                words.splice(rand, 1);
+                updateGrid();
                 score++;
                 document.getElementById("score").innerHTML = "Current Score: " + score;
-                words.splice(check,1);
+                // words.splice(check,1);
             }            
         }
         input.value = "";
@@ -27,6 +35,7 @@ document.onkeydown = function(e) {
     }
 
 }
+
 
 function startGame() {
     
@@ -41,20 +50,31 @@ function initGrid() {
     let i = 1;
     while (i <= 9) {
         //TODO: no duplicates
-        //rand from 1 to words.length
         let rand = Math.floor(Math.random() * words.length);
-        //str should be pulled from the words and moved to active
         let str = words[rand];
         words.splice(rand, 1);
         active.push(str);
-        // document.getElementById("word" + i).innerHTML = str;
+        
         i = i + 1;
     }
 
-    updateGrid;
+
+    updateGrid();
 }
 function updateGrid() {
+    // console.log(active[0]);
+    // console.log(active[1]);
+    // console.log(active[2]);
     document.getElementById("word1").innerHTML = active[0];
+    document.getElementById("word2").innerHTML = active[1];
+    document.getElementById("word3").innerHTML = active[2];
+    document.getElementById("word4").innerHTML = active[3];
+    document.getElementById("word5").innerHTML = active[4];
+    document.getElementById("word6").innerHTML = active[5];
+    document.getElementById("word7").innerHTML = active[6];
+    document.getElementById("word8").innerHTML = active[7];
+    document.getElementById("word9").innerHTML = active[8];
+
     //TODO: ETCCCC
 }
 
