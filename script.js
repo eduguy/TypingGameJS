@@ -38,7 +38,13 @@ function switchVal(check) {
     let v = check+1;
     let val = document.getElementById("word" + v);
     val.innerHTML = active[check];
-    setTimeout(fadeOut, 4000, val, check);
+    fadeOut(val, check);
+}
+
+function fade(val) {
+    let font = val.style.fontSize;
+    val.style.fontSize = "75%";
+    
 }
 
 function fadeOut(elem, check) {
@@ -46,14 +52,19 @@ function fadeOut(elem, check) {
     //fadeout
     //getnewword
     //elem is the word the element that needs to be faded
+    let shrink = setInterval(fade, 100, elem);
+    setTimeout(ddd, 4000, check, shrink);
+}
+
+function ddd(check, shrink) {
     console.log("fadeout");
-    missedWords = missedWords +1;
+    missedWords = missedWords + 1;
     let rand = Math.floor(Math.random() * words.length);
     let str = words[rand];
-    active[check]= str;
-     words.splice(rand, 1);
-    switchVal(check)
-
+    active[check] = str;
+    words.splice(rand, 1);
+    clearInterval(shrink);
+    switchVal(check);
 }
 
 function startGame() {
