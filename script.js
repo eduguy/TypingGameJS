@@ -1,5 +1,5 @@
 //TODO: find a way to scrape words from somewhere or create a more exhaustive list
-let words = ['abc', 'bac', 'climb', 'rock', 'calculator', 'fds', 'fsa', 'bike', 'fork', 'mea', 
+let words = ['abc', 'bac', 'climb', 'rock', 'calculator', 'fds', 'fsa', 'bike', 'fork', 'mea', '123', 'aae', 
 'dog','cat'];
 let active = [];
 let score = 0;
@@ -21,8 +21,7 @@ document.onkeydown = function(e) {
                 let rand = Math.floor(Math.random() * words.length);
                 let str = words[rand];
                 active[check]= str;
-                
-                words.splice(rand, 1);
+                 words.splice(rand, 1);
                 switchVal(check);
                 score++;
                 document.getElementById("score").innerHTML = "Current Score: " + score;
@@ -49,6 +48,12 @@ function fadeOut(elem, check) {
     //elem is the word the element that needs to be faded
     console.log("fadeout");
     missedWords = missedWords +1;
+    let rand = Math.floor(Math.random() * words.length);
+    let str = words[rand];
+    active[check]= str;
+     words.splice(rand, 1);
+    switchVal(check)
+
 }
 
 function startGame() {
