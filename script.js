@@ -1,6 +1,6 @@
 //TODO: find a way to scrape words from somewhere or create a more exhaustive list
 let words = ['abc', 'bac', 'climb', 'rock', 'calculator', 'fds', 'fsa', 'bike', 'fork', 'mea', '123', 'aae', 
-'dog','cat'];
+'dog','cat','paper', 'phone', 'pen', 'pencil', 'cube', 'square'];
 let active = [];
 let score = 0;
 let time = 20; //seconds
@@ -41,15 +41,22 @@ function switchVal(indexOfWord) {
 }
 function fadeOut(elem, indexOfWord) {
     //TODO: when word is picked, reset this fade timeout because now it's stacking up
-    setTimeout(fade, 3000, elem);
-    setTimeout(newWordTimeOut, 4000, indexOfWord);
+    setTimeout(fade, 3000, elem, elem.innerHTML,indexOfWord);
+    setTimeout(newWordTimeOut, 4000, indexOfWord, elem.innerHTML);
 }
-function fade(val) {
-    val.style.color = "red";
-    setTimeout(function(){ val.style.color="black"; }, 1000)
+function fade(val, origText, indexOfWord) {
+    //if i pass the oriignal text here i can compare it?
+    if (active[indexOfWord] === origText) {
+        val.style.color = "red";
+        setTimeout(function(){ val.style.color="black"; }, 1000)
+    }
 }
 
-function newWordTimeOut(indexOfWord) {
+function newWordTimeOut(indexOfWord, origText) {
+    //if i pass the oriignal text here i can compare it so if the text has already changed,
+    //then don't do anything
+    if (active[indexOfWord] === origText) {
+
     console.log("fadeout");
     missedWords = missedWords + 1;
     let rand = Math.floor(Math.random() * words.length);
@@ -57,6 +64,7 @@ function newWordTimeOut(indexOfWord) {
     active[indexOfWord] = str;
     words.splice(rand, 1);
     switchVal(indexOfWord);
+    }
 }
 
 function startGame() {
