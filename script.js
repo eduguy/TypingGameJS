@@ -3,7 +3,7 @@ let words = ['abc', 'bac', 'climb', 'rock', 'calculator', 'fds', 'fsa', 'bike', 
 'dog','cat'];
 let active = [];
 let score = 0;
-let time = 30;
+let time = 20; //seconds
 let gameOn=false;
 let interval;
 let missedWords=0;
@@ -15,17 +15,16 @@ document.onkeydown = function(e) {
 
             let input = document.getElementById("input");
             let val = input.value.trim();
-            let check = active.indexOf(val);
-            if (check !== -1) {
+            let indexOfWord = active.indexOf(val);
+            if (indexOfWord !== -1) {
 
                 let rand = Math.floor(Math.random() * words.length);
                 let str = words[rand];
-                active[check]= str;
-                 words.splice(rand, 1);
-                switchVal(check);
+                active[indexOfWord]= str;
+                words.splice(rand, 1);
+                switchVal(indexOfWord);
                 score++;
                 document.getElementById("score").innerHTML = "Current Score: " + score;
-                // words.splice(check,1);
             }            
         }
         input.value = "";
@@ -34,46 +33,40 @@ document.onkeydown = function(e) {
     }
 }
 
-function switchVal(check) {
-    let v = check+1;
+function switchVal(indexOfWord) {
+    let v = indexOfWord+1;
     let val = document.getElementById("word" + v);
-    val.innerHTML = active[check];
-    fadeOut(val, check);
+    val.innerHTML = active[indexOfWord];
+    fadeOut(val, indexOfWord);
 }
-
+function fadeOut(elem, indexOfWord) {
+    //TODO: when word is picked, reset this fade timeout because now it's stacking up
+    setTimeout(fade, 3000, elem);
+    setTimeout(newWordTimeOut, 4000, indexOfWord);
+}
 function fade(val) {
-    let font = val.style.fontSize;
-    val.style.fontSize = "75%";
-    
+    val.style.color = "red";
+    setTimeout(function(){ val.style.color="black"; }, 1000)
 }
 
-function fadeOut(elem, check) {
-    //TODO::
-    //fadeout
-    //getnewword
-    //elem is the word the element that needs to be faded
-    let shrink = setInterval(fade, 100, elem);
-    setTimeout(ddd, 4000, check, shrink);
-}
-
-function ddd(check, shrink) {
+function newWordTimeOut(indexOfWord) {
     console.log("fadeout");
     missedWords = missedWords + 1;
     let rand = Math.floor(Math.random() * words.length);
     let str = words[rand];
-    active[check] = str;
+    active[indexOfWord] = str;
     words.splice(rand, 1);
-    clearInterval(shrink);
-    switchVal(check);
+    switchVal(indexOfWord);
 }
 
 function startGame() {
     
     initGrid();
+    document.getElementById("timeLeft").innerHTML="TIME LEFT: " + time;
     gameOn = true;
     document.getElementById("input").focus();
     interval = setInterval(decrementTime, 1000);
-    setTimeout(endGame, 30000);
+    setTimeout(endGame, time*1000);
 }
 
 function initGrid() {
@@ -83,15 +76,8 @@ function initGrid() {
         let str = words[rand];
         words.splice(rand, 1);
         active.push(str);
-        
         i = i + 1;
     }
-
-
-    updateGrid();
-}
-function updateGrid() {
-
     document.getElementById("word1").innerHTML = active[0];
     document.getElementById("word2").innerHTML = active[1];
     document.getElementById("word3").innerHTML = active[2];
@@ -101,17 +87,18 @@ function updateGrid() {
     document.getElementById("word7").innerHTML = active[6];
     document.getElementById("word8").innerHTML = active[7];
     document.getElementById("word9").innerHTML = active[8];
-
 }
+
 
 
 function decrementTime() {
-        time = time-1;
-        document.getElementById("timeLeft").innerHTML="TIME LEFT: " + time;
+    time = time-1;
+    document.getElementById("timeLeft").innerHTML="TIME LEFT: " + time;
 }
 
 function endGame() {
-    //TODO: popup box with score
     gameOn = false;
     clearInterval(interval);
+    let finalScore = score-missedWords;
+    window.alert("Your final score (minus missed words) is: "+finalScore)
 }
