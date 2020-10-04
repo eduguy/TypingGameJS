@@ -28,7 +28,10 @@
 
 
 }
-
+.instructions {
+    font-size:1rem;
+    color:white;
+}
 #board p {
     border: 1px solid black;
     font-size:3rem;
@@ -47,7 +50,7 @@ label {
     color: white;
 }
 #inputStuff {
-    padding-top: 75vh;
+    padding-top: 68vh;
 }
 
 h2 {
