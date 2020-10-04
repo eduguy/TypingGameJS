@@ -7,49 +7,41 @@
  </head>
 
  <body>
-     <h2 id ="timeLeft"> TIME LEFT: </h2>
+     <div>
      <p class="instructions"> INSTRUCTIONS</p>
-     <p class="instructions"> When you press start, the words will appear. After 4 seconds, they will turn red, and
-         after one more second they will disappear. Every word you get gains you one point, and a word
-         you miss subtracts one point. After, all words will stay on screen for 4 seconds.
+     <p class="instructions">> When you press start, the words will appear. After 4 seconds, they will turn red, and
+         after one more second they will disappear. After, all words will stay on screen for 4 seconds, with them turning red
+         with one second left. Every word you type gains you one point, and a word you miss subtracts one point. 
      </p>
+     <button id = "start" onClick = "startGame()"> Start! </button>
+
+    </div>
     <div id = "board">
         <div id="column1" class = "boardComp">
-            <!-- <p> Javascript word </p> -->
             <p id="word1"> Word 1 </p>
             <p id="word2"> Word 2 </p>
             <p id="word3"> Word 3 </p>
         </div>
         <div id="column2" class = "boardComp">
-            <!-- <p> Javascript word </p> -->
             <p id="word4"> Word 4 </p>
             <p id="word5"> Word 5 </p>
             <p id="word6"> Word 6 </p>
         </div>
         <div id="column3" class = "boardComp">
-            <!-- <p> Javascript word </p> -->
             <p id="word7"> Word 7 </p>
             <p id="word8"> Word 8 </p>
             <p id="word9"> Word 9 </p>
         </div>
-        <!-- <div id="column4" class = "boardComp">
-            <p> Javascript word </p>
-            <p> Javascript word </p>
-            <p> Javascript word </p>
-            <p> Javascript word </p>
-        </div> -->
+
     </div>
     <div id = "inputStuff">
-        <button id = "start" onClick = "startGame()"> Start! </button>
-        <h2 id="score"> Current Score: 0</h2>
+            <h2 id ="timeLeft"> Time Left: </h2>
+            <h2 id="score"> Current Score: 0</h2>
         <form >
             <label for="input"> Enter your input:</label>
-            <!-- could work with using input, but that refreshes page? -->
             <textarea id= "input"> </textarea>
-            <!-- use js to submit this on enter, reset it -->
 
         </form>
-        <!-- <button id = "button" onclick="doSmth()"> DO SOMETHING</button> -->
     </div>
 </body>
 </html>

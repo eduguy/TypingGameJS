@@ -1,11 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+
 #board {
-    
+    border-radius:2%;
     display:flex;
     flex-direction: row;
-    background-color: aqua;
-    width: 80vw;
-    height:60vh;
-    /* width: 1000px;
+    background-color: antiquewhite;
+    width: 70vw;
+    height:55vh;
+    /* width: 750px;
     height:500px; */
     position:absolute;
     left:50%;
@@ -16,21 +19,21 @@
 
 
 }
-
 .boardComp {
     display: flex;
     flex-direction: column;
-    /* border: 1px solid black; */
-    padding-left:5vw;
-    padding-right:5vw;
-    padding-top:3vh;
-    padding-bottom:3vh
+    padding-left:4vw;
+    padding-right:4vw;
+
 
 
 }
 .instructions {
-    font-size:1rem;
+    font-size:1.1rem;
     color:white;
+    padding-left: 10%;
+    padding-right: 10%;
+
 }
 #board p {
     border: 1px solid black;
@@ -40,9 +43,12 @@
 
 
 body {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     overflow:hidden;
     background-color: black;
+    font-family: 'Lato', Helvetica, Arial;
 }
 
 label {
@@ -50,7 +56,7 @@ label {
     color: white;
 }
 #inputStuff {
-    padding-top: 68vh;
+    padding-top: 60vh;
 }
 
 h2 {
@@ -59,4 +65,15 @@ h2 {
 
 #start {
     font-size: 2rem;
+}
+
+#text {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 1250px) {
+    #board {
+        width: 95vw;
+    }
 }
