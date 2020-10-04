@@ -3,6 +3,8 @@ let words = ['abc', 'bac', 'climb', 'rock', 'calculator', 'fds', 'fsa', 'bike', 
 'dog','cat','paper', 'phone', 'pen', 'pencil', 'cube', 'square'];
 let active = [];
 let score = 0;
+const wordTime = 4000;
+const fadeTime = 3000;
 let time = 20; //seconds
 let gameOn=false;
 let interval;
@@ -37,18 +39,20 @@ function switchVal(indexOfWord) {
     let v = indexOfWord+1;
     let val = document.getElementById("word" + v);
     val.innerHTML = active[indexOfWord];
+    val.style.color="black";
     fadeOut(val, indexOfWord);
 }
 function fadeOut(elem, indexOfWord) {
-    //TODO: when word is picked, reset this fade timeout because now it's stacking up
-    setTimeout(fade, 3000, elem, elem.innerHTML,indexOfWord);
-    setTimeout(newWordTimeOut, 4000, indexOfWord, elem.innerHTML);
+   
+    setTimeout(fade, fadeTime, elem, elem.innerHTML,indexOfWord);
+    setTimeout(newWordTimeOut, wordTime, indexOfWord, elem.innerHTML);
 }
 function fade(val, origText, indexOfWord) {
     //if i pass the oriignal text here i can compare it?
     if (active[indexOfWord] === origText) {
         val.style.color = "red";
-        setTimeout(function(){ val.style.color="black"; }, 1000)
+        // setTimeout(function(){ val.style.color="black"; }, 1000)
+        //every word that comes in will rset color to black
     }
 }
 
@@ -56,14 +60,14 @@ function newWordTimeOut(indexOfWord, origText) {
     //if i pass the oriignal text here i can compare it so if the text has already changed,
     //then don't do anything
     if (active[indexOfWord] === origText) {
-
-    console.log("fadeout");
-    missedWords = missedWords + 1;
-    let rand = Math.floor(Math.random() * words.length);
-    let str = words[rand];
-    active[indexOfWord] = str;
-    words.splice(rand, 1);
-    switchVal(indexOfWord);
+        console.log("fadeout");
+        missedWords = missedWords + 1;
+        let rand = Math.floor(Math.random() * words.length);
+        let str = words[rand];
+        active[indexOfWord] = str;
+        document.getElementById("word"+(indexOfWord+1)).style.color="black";
+        words.splice(rand, 1);
+        switchVal(indexOfWord);
     }
 }
 
