@@ -24,7 +24,8 @@ document.onkeydown = function(e) {
                 switchVal(indexOfWord);
                 score++;
                 document.getElementById("score").innerHTML = "Current Score: " + (score-missedWords);
-            }            
+            }
+            input.value = "";            
         }
     }
 }
@@ -106,7 +107,7 @@ function endGame() {
     gameOn = false;
     clearAllIntervals();
     enableButton();
-    window.alert("You typed "+score +" words in " + gameLength + " seconds for a WPM of: " + (score/gameLength));
+    window.alert("You typed "+score +" words in " + gameLength + " seconds for a WPM of: " + Math.round(score/(60/gameLength)));
     document.getElementById("score").innerHTML = "Final Score: " + (score-missedWords);
     resetGame();
 }
