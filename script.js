@@ -26,9 +26,6 @@ document.onkeydown = function(e) {
                 document.getElementById("score").innerHTML = "Current Score: " + (score-missedWords);
             }            
         }
-        input.value = "";
-
-
     }
 }
 
@@ -44,23 +41,21 @@ function switchVal(indexOfWord) {
     let val = document.getElementById("word" + v);
     val.innerHTML = active[indexOfWord];
     val.style.color="black";
-    fadeOut(val, indexOfWord);
+    initTimers(val, indexOfWord);
 }
-function fadeOut(elem, indexOfWord) {
+function initTimers(elem, indexOfWord) {
    
-    setTimeout(fade, fadeTime, elem, elem.innerHTML,indexOfWord);
+    setTimeout(switchColor, fadeTime, elem, elem.innerHTML,indexOfWord);
     setTimeout(newWordTimeOut, wordTime, indexOfWord, elem.innerHTML);
 }
-function fade(val, origText, indexOfWord) {
+function switchColor(val, origText, indexOfWord) {
     if (active[indexOfWord] === origText) {
         val.style.color = "red";
-
     }
 }
 
 function newWordTimeOut(indexOfWord, origText) {
     if (active[indexOfWord] === origText) {
-        console.log("fadeout");
         missedWords = missedWords + 1;
         updateArrays(indexOfWord);
         document.getElementById("word"+(indexOfWord+1)).style.color="black";
@@ -95,7 +90,7 @@ function initGrid() {
         active.push(str);
         let w = document.getElementById("word"+i);
         w.innerHTML=active[i-1];
-        setTimeout(fadeOut,1000,w,i-1)
+        setTimeout(initTimers,1000,w,i-1)
         i = i + 1;
     }
 }
